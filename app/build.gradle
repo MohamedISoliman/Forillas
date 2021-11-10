@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id("com.apollographql.apollo").version("2.5.5")
+    id("com.apollographql.apollo").version("2.5.10")
 }
 
 android {
@@ -46,6 +46,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    apollo {
+        generateKotlinModels.set(true)
+    }
 }
 
 dependencies {
@@ -70,7 +74,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
 
     // apollo
-    def apolloVersion = "2.5.5"
+    def apolloVersion = "2.5.10"
     implementation("com.apollographql.apollo:apollo-runtime:$apolloVersion")
     implementation("com.apollographql.apollo:apollo-coroutines-support:$apolloVersion")
 }
