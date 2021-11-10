@@ -10,5 +10,5 @@ class FeedRepository(
 
     override fun retrieveAllPosts(): Flow<List<FeedPost>> = remote.retrieveAllPosts()
 
-    override fun retrievePost(id: Long): Flow<FeedPost> = remote.retrievePost(id)
+    override fun retrievePost(id: String): Flow<FeedPost> = remote.retrievePost(id)
 }

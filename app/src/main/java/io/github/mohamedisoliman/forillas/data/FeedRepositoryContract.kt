@@ -7,5 +7,5 @@ interface FeedRepositoryContract {
 
     fun retrieveAllPosts(): Flow<List<FeedPost>>
 
-    fun retrievePost(id: Long): Flow<FeedPost>
+    fun retrievePost(id: String): Flow<FeedPost>
 }

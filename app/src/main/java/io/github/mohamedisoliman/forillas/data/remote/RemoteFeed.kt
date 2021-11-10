@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 class RemoteFeed(private val apolloClient: ApolloClient) : RemoteFeedContract {
 
     override fun retrieveAllPosts(options: PageOptions): Flow<List<FeedPost>> = flow {
-//
+
         val input = Input.optional(PageQueryOptions())
         val response = apolloClient.query(GetAllPostsQuery(input)).await()
         if (response.hasErrors()) {
@@ -29,8 +29,8 @@ class RemoteFeed(private val apolloClient: ApolloClient) : RemoteFeedContract {
 
     }
 
-    override fun retrievePost(id: Long): Flow<FeedPost> = flow {
-        val response = apolloClient.query(GetPostQuery(id.toString())).await()
+    override fun retrievePost(id: String): Flow<FeedPost> = flow {
+        val response = apolloClient.query(GetPostQuery(id)).await()
         if (response.hasErrors()) {
             throw RuntimeException(response.errors?.firstOrNull()?.message)
         } else {
