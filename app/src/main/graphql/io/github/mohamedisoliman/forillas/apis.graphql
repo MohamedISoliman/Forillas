@@ -1,4 +1,4 @@
-query AllPosts($options: PageQueryOptions) {
+query GetAllPosts($options: PageQueryOptions) {
     posts(options: $options) {
         data {
             id
