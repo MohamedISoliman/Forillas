@@ -14,8 +14,10 @@ class RetrieveAllPosts(
     override fun invoke(): Flow<HomeState> {
         return feedRepository.retrieveAllPosts()
             .map {
-                if (it.isEmpty()) HomeState.EmptyResult
-                else HomeState.Success(result = it)
+                if (it.isEmpty())
+                    HomeState.EmptyResult
+                else
+                    HomeState.Success(result = it)
             }
             .catch { emit(HomeState.Failure(it)) }
             .onStart { emit(HomeState.Loading) }
