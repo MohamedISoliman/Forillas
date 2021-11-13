@@ -2,4 +2,6 @@
     <string name="app_name">Forillas</string>
     <string name="emptyViewMessage">It\'s time to meditate :)</string>
     <string name="defaultErrorMessage">Something wrong happened!</string>
+    <string name="home_screen">home scrren</string>
+    <string name="post_details">Post details</string>
 </resources>

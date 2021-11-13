@@ -1,5 +1,6 @@
 package io.github.mohamedisoliman.forillas.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
@@ -22,22 +23,26 @@ import io.github.mohamedisoliman.forillas.ui.common.PlaceHolderView
 
 
 @Composable
-fun Home(viewModel: HomeViewModel) {
+fun Home(
+    viewModel: HomeViewModel,
+    onItemClicked: (String) -> Unit = {},
+) {
     val viewState = viewModel.state().collectAsState()
     val value: HomeState = viewState.value
-    HomeContent(value)
+    HomeContent(value, onItemClicked)
 }
 
 @Composable
 private fun HomeContent(
     state: HomeState,
+    onItemClicked: (String) -> Unit,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         LoadingView(modifier = Modifier.align(Alignment.Center), isLoading = state.isLoading)
-        PostsListView(list = state.postsListWithBodyTruncated)
+        PostsListView(list = state.postsListWithBodyTruncated, onItemClicked = onItemClicked)
         EmptyView(list = state.postsList)
         ErrorView(throwable = state.throwable)
     }
@@ -73,7 +78,11 @@ fun LoadingView(modifier: Modifier = Modifier, isLoading: Boolean?) {
 }
 
 @Composable
-fun PostsListView(modifier: Modifier = Modifier, list: List<FeedPost>?) {
+fun PostsListView(
+    modifier: Modifier = Modifier,
+    list: List<FeedPost>?,
+    onItemClicked: (String) -> Unit,
+) {
     if (list?.isNotEmpty() == true) {
         LazyColumn(
             modifier = modifier
@@ -85,8 +94,10 @@ fun PostsListView(modifier: Modifier = Modifier, list: List<FeedPost>?) {
 
             list.forEachIndexed { index, feedPost ->
                 item {
-                    PostView(item = feedPost) {
-                        //TODO:navigate to Details
+                    PostView(item = feedPost) { id ->
+                        if (id != null) {
+                            onItemClicked(id)
+                        }
                     }
                 }
                 if (index < list.lastIndex)
@@ -103,10 +114,12 @@ fun PostsListView(modifier: Modifier = Modifier, list: List<FeedPost>?) {
 fun PostView(
     modifier: Modifier = Modifier,
     item: FeedPost,
-    onClick: () -> Unit,
+    onClick: (String?) -> Unit,
 ) {
     Column(
-        modifier = modifier.padding(vertical = 8.dp),
+        modifier = modifier
+            .padding(vertical = 8.dp)
+            .clickable { onClick(item.id) },
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = item.title ?: "", style = MaterialTheme.typography.h5)
