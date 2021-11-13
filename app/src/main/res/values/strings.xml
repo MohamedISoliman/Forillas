@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Forillas</string>
+    <string name="emptyViewMessage">It\'s time to meditate :)</string>
+    <string name="defaultErrorMessage">Something wrong happened!</string>
 </resources>
