@@ -33,13 +33,12 @@ fun Home(viewModel: HomeViewModel) {
 private fun HomeContent(
     state: HomeState,
 ) {
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         LoadingView(modifier = Modifier.align(Alignment.Center), isLoading = state.isLoading)
-        PostsListView(list = state.postsList)
+        PostsListView(list = state.postsListWithBodyTruncated)
         EmptyView(list = state.postsList)
         ErrorView(throwable = state.throwable)
     }
