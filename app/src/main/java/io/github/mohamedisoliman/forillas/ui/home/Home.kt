@@ -24,7 +24,6 @@ import io.github.mohamedisoliman.forillas.ui.common.PlaceHolderView
 @Composable
 fun Home(viewModel: HomeViewModel) {
     val viewState = viewModel.state().collectAsState()
-
     val value: HomeState = viewState.value
     HomeContent(value)
 }
