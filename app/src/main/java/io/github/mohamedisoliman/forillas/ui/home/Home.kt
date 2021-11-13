@@ -12,6 +12,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,8 +28,8 @@ fun Home(
     viewModel: HomeViewModel,
     onItemClicked: (String) -> Unit = {},
 ) {
-    val viewState = viewModel.state().collectAsState()
-    val value: HomeState = viewState.value
+    val viewState = viewModel.state().observeAsState()
+    val value: HomeState = viewState.value ?: HomeState.Initial
     HomeContent(value, onItemClicked)
 }
 

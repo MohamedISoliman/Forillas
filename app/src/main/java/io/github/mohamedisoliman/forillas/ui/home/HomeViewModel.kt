@@ -1,6 +1,7 @@
 package io.github.mohamedisoliman.forillas.ui.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import io.github.mohamedisoliman.forillas.data.entities.FeedPost
 import io.github.mohamedisoliman.forillas.domain.HomeState
@@ -15,7 +16,7 @@ class HomeViewModel(
 ) : ViewModel() {
 
     private val state = MutableStateFlow<HomeState>(HomeState.Initial)
-    fun state() = state.asStateFlow()
+    fun state() = state.asLiveData()
 
 
     init {
