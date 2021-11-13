@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.mohamedisoliman.forillas.data.FeedRepository
 import io.github.mohamedisoliman.forillas.data.apollo.apolloClient
 import io.github.mohamedisoliman.forillas.data.apollo.okhttpClient
@@ -27,6 +28,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import logcat.logcat
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

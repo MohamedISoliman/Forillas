@@ -5,8 +5,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import logcat.logcat
+import javax.inject.Inject
 
-class RetrieveAllPosts(
+class RetrieveAllPosts @Inject constructor(
     private val feedRepository: FeedRepository,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : () -> Flow<HomeState> {

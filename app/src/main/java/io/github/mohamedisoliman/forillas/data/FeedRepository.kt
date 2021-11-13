@@ -3,8 +3,9 @@ package io.github.mohamedisoliman.forillas.data
 import io.github.mohamedisoliman.forillas.data.entities.FeedPost
 import io.github.mohamedisoliman.forillas.data.remote.RemoteFeedContract
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class FeedRepository(
+class FeedRepository @Inject constructor(
     private val remote: RemoteFeedContract,
 ) : FeedRepositoryContract {
 

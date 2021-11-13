@@ -2,18 +2,16 @@ package io.github.mohamedisoliman.forillas.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import io.github.mohamedisoliman.forillas.di.Dependencies
 import io.github.mohamedisoliman.forillas.navigation.Screen.Home
 import io.github.mohamedisoliman.forillas.navigation.Screen.PostDetails
 import io.github.mohamedisoliman.forillas.ui.home.Home
 import io.github.mohamedisoliman.forillas.ui.home.HomeViewModel
-import io.github.mohamedisoliman.forillas.ui.home.HomeViewModelFactory
 import io.github.mohamedisoliman.forillas.ui.post.PostDetails
 
 
@@ -22,8 +20,7 @@ fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
 ) {
-    val viewModel: HomeViewModel =
-        viewModel(factory = HomeViewModelFactory(Dependencies.retrievePosts()))
+    val viewModel: HomeViewModel = hiltViewModel()
 
     NavHost(
         navController = navController,
