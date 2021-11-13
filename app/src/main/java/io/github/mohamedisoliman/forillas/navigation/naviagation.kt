@@ -9,7 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import io.github.mohamedisoliman.forillas.di.Dependencies
-import io.github.mohamedisoliman.forillas.navigation.Screen.*
+import io.github.mohamedisoliman.forillas.navigation.Screen.Home
+import io.github.mohamedisoliman.forillas.navigation.Screen.PostDetails
 import io.github.mohamedisoliman.forillas.ui.home.Home
 import io.github.mohamedisoliman.forillas.ui.home.HomeViewModel
 import io.github.mohamedisoliman.forillas.ui.home.HomeViewModelFactory
@@ -38,7 +39,7 @@ fun AppNavigation(
 
         composable(
             route = "${PostDetails.route}/{${PostDetails.POST_ID_ARG}}",
-            arguments = listOf(navArgument(PostDetails.POST_ID_ARG) { type = NavType.LongType })
+            arguments = listOf(navArgument(PostDetails.POST_ID_ARG) { type = NavType.StringType })
         ) { entry ->
 
             val id = entry.arguments?.getString(PostDetails.POST_ID_ARG)

@@ -4,6 +4,10 @@ query GetAllPosts($options: PageQueryOptions) {
             id
             title
             body
+            user {
+                name
+                username
+            }
         }
         meta {
             totalCount

@@ -21,7 +21,13 @@ class RemoteFeed(private val apolloClient: ApolloClient) : RemoteFeedContract {
             throw RuntimeException(response.errors?.firstOrNull()?.message)
         } else {
             val posts = response.data?.posts?.data?.mapNotNull {
-                FeedPost(body = it?.body, title = it?.title, id = it?.id)
+                FeedPost(
+                    body = it?.body,
+                    title = it?.title,
+                    id = it?.id,
+                    name = it?.user?.name,
+                    userName = it?.user?.username
+                )
             }
             emit(posts ?: emptyList<FeedPost>())
 

@@ -38,7 +38,9 @@ private fun HomeContent(
     onItemClicked: (String) -> Unit,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {
         LoadingView(modifier = Modifier.align(Alignment.Center), isLoading = state.isLoading)
@@ -85,10 +87,7 @@ fun PostsListView(
 ) {
     if (list?.isNotEmpty() == true) {
         LazyColumn(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-
+            modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
