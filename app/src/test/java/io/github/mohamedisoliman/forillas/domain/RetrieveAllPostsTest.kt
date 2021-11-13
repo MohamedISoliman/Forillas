@@ -3,6 +3,7 @@ package io.github.mohamedisoliman.forillas.domain
 import io.github.mohamedisoliman.forillas.data.FeedRepository
 import io.github.mohamedisoliman.forillas.data.entities.FeedPost
 import io.github.mohamedisoliman.forillas.data.remote.RemoteFeed
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.drop
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import logcat.logcat
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -51,18 +53,19 @@ class RetrieveAllPostsTest {
     fun `GIVEN remote return result WHEN RetrieveAllPosts() invoked THEN return Success state`(): Unit =
         runBlocking {
             //GIVEN
-            val post = mockk<FeedPost>()
+            val post = FeedPost()
             val remote = mockk<RemoteFeed>()
             val repo = FeedRepository(remote)
             val interactor = RetrieveAllPosts(feedRepository = repo)
-            val list = listOf(post, post, post)
-            every { remote.retrieveAllPosts() } returns flowOf(list)
+            val expected = listOf(post, post, post)
+
+            every { remote.retrieveAllPosts() } returns flowOf(expected)
 
             //WHEN
-            val first = interactor.invoke().drop(1).first()
+            val state = interactor.invoke().drop(1).first()
 
             //THEN
-            assertTrue(first is HomeState.Success && first.result.size == list.size)
+            assertTrue(state is HomeState.Success && state.result.size == expected.size)
         }
 
 

@@ -20,8 +20,8 @@ class RetrieveAllPosts(
                     HomeState.Success(result = it)
             }
             .catch { emit(HomeState.Failure(it)) }
-            .onStart { emit(HomeState.Loading) }
             .onEach { logcat { it.toString() } }
+            .onStart { emit(HomeState.Loading) }
             .flowOn(dispatcher)
     }
 }
