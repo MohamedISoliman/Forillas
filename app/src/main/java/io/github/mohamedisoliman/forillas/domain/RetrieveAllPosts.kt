@@ -5,6 +5,7 @@ import io.github.mohamedisoliman.forillas.data.entities.FeedPost
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import logcat.logcat
 
 class RetrieveAllPosts(
     private val feedRepository: FeedRepository,
@@ -21,6 +22,7 @@ class RetrieveAllPosts(
             }
             .catch { emit(HomeState.Failure(it)) }
             .onStart { emit(HomeState.Loading) }
+            .onEach { logcat { it.toString() } }
             .flowOn(dispatcher)
     }
 }
@@ -30,9 +32,15 @@ sealed class HomeState(
     val postsList: List<FeedPost>? = null,
     val throwable: Throwable? = null,
 ) {
+    object Initial : HomeState()
     object EmptyResult : HomeState(postsList = emptyList())
     object Loading : HomeState(isLoading = true)
     data class Success(val result: List<FeedPost>) : HomeState(postsList = result)
     data class Failure(val error: Throwable) : HomeState(throwable = error)
+
+    private val BODY_LIMIT = 20
+    val postsListWithBodyTruncated = postsList?.map { item ->
+        item.copy(body = item.body?.take(BODY_LIMIT))
+    }
 
 }
