@@ -34,21 +34,4 @@ class RemoteFeed(private val apolloClient: ApolloClient) : RemoteFeedContract {
         }
 
     }
-
-    override fun retrievePost(id: String): Flow<FeedPost> = flow {
-        val response = apolloClient.query(GetPostQuery(id)).await()
-        if (response.hasErrors()) {
-            throw RuntimeException(response.errors?.firstOrNull()?.message)
-        } else {
-            val post =
-                response.data?.post?.let {
-                    FeedPost(
-                        body = it.body,
-                        title = it.title,
-                        id = it.id
-                    )
-                }
-            emit(post ?: FeedPost())
-        }
-    }
 }

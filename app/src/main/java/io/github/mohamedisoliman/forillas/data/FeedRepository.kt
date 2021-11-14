@@ -12,5 +12,4 @@ class FeedRepository @Inject constructor(
 
     override fun retrieveAllPosts(): Flow<List<FeedPost>> = remote.retrieveAllPosts()
 
-    override fun retrievePost(id: String): Flow<FeedPost> = remote.retrievePost(id)
 }
