@@ -1,13 +1,11 @@
 package io.github.mohamedisoliman.forillas.di
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.mohamedisoliman.forillas.data.FeedRepository
-import io.github.mohamedisoliman.forillas.data.FeedRepositoryContract
+import io.github.mohamedisoliman.forillas.domain.FeedRepositoryContract
 import io.github.mohamedisoliman.forillas.data.apollo.apolloClient
 import io.github.mohamedisoliman.forillas.data.apollo.okhttpClient
 import io.github.mohamedisoliman.forillas.data.remote.RemoteFeed
